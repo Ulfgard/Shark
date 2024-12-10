@@ -223,9 +223,9 @@ void importPGMSet(std::string const&p, Data<T> &set){
 	std::vector<std::pair<std::size_t,std::size_t> > info;
 	if (boost::filesystem::is_directory(p)) {
 		for (boost::filesystem::recursive_directory_iterator itr(p); itr!=boost::filesystem::recursive_directory_iterator(); ++itr) {
-			if (boost::filesystem::is_regular(itr->status())) {
-				if ((boost::filesystem::extension(itr->path()) == ".PGM") ||
-				    (boost::filesystem::extension(itr->path()) == ".pgm")) {
+			if (boost::filesystem::is_regular_file(itr->status())) {
+				if ((boost::filesystem::path(itr->path()) == ".PGM") ||
+				    (boost::filesystem::path(itr->path()) == ".pgm")) {
 					T img;
 					std::pair<std::size_t,std::size_t> imgInfo;
 					importPGM(itr->path().string().c_str(), img, imgInfo.first, imgInfo.second);
